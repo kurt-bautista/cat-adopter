@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "92627361376",
+    "firebase_url": "https://catadopter-9e09d.firebaseio.com",
+    "project_id": "catadopter-9e09d",
+    "storage_bucket": "catadopter-9e09d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:92627361376:android:c04129d9b6173b38",
+        "android_client_info": {
+          "package_name": "com.pelaez.bautista.catadopter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "92627361376-ipi42am5c80h4q0jfsako8obn7rjsmrl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBvhTlS-iXmGKxcHmlZvczrXf2b9QF9LTE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
