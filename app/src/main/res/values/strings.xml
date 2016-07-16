@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">CatAdopter</string>
+    <string name="welcome">Welcome</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="rememberMe">Remember Me</string>
+    <string name="signIn">Log In</string>
+    <string name="register">or create a new account</string>
 </resources>
