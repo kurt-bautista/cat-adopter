@@ -37,7 +37,8 @@
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
             android:ems="10"
-            android:id="@+id/emailTextBox" />
+            android:id="@+id/emailTextBox"
+            android:hint="someone@example.com" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -51,7 +52,8 @@
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:ems="10"
-            android:id="@+id/passwordTextBox" />
+            android:id="@+id/passwordTextBox"
+            android:hint="password" />
 
         <CheckBox
             android:layout_width="wrap_content"
