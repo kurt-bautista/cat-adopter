@@ -6,4 +6,8 @@
     <string name="rememberMe">Remember Me</string>
     <string name="signIn">Log In</string>
     <string name="register"><u>or create a new account</u></string>
+    <string name="name">Name</string>
+    <string name="contact">Contact Number</string>
+    <string name="repeat">Repeat password</string>
+    <string name="confirmRegister">Confirm</string>
 </resources>
