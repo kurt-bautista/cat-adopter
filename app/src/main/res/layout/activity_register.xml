@@ -96,7 +96,7 @@
             android:layout_height="wrap_content"
             android:text="@string/confirmRegister"
             android:id="@+id/registerButton"
-            android:onClick="createAccount"
+            android:onClick="confirm"
             android:layout_marginTop="20dp" />
 
     </LinearLayout>

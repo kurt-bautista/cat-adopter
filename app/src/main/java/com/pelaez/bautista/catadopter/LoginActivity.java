@@ -82,8 +82,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void register(View v) {
-//        Intent i = new Intent(this, com.pelaez.bautista.catadopter.RegisterActivity.class);
-//        startActivity(i);
+        Intent i = new Intent(this, com.pelaez.bautista.catadopter.RegisterActivity.class);
+        startActivity(i);
     }
 
     private boolean validateForm() {
