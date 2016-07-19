@@ -47,7 +47,13 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                if(user != null) Toast.makeText(RegisterActivity.this, "register", Toast.LENGTH_SHORT).show(); //start MainActivity
+                if(user != null) {
+                    Toast.makeText(RegisterActivity.this, "register", Toast.LENGTH_SHORT).show(); //start MainActivity
+                    User u = new User(user.getUid(), user.getEmail(), name.getText().toString(), contact.getText().toString());
+                    FirebaseDatabase db = FirebaseDatabase.getInstance();
+                    DatabaseReference users = db.getReference("users");
+                    users.child(user.getUid()).setValue(u);
+                }
                 else; //signed out
             }
         };
@@ -96,9 +102,9 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(!task.isSuccessful()) Toast.makeText(RegisterActivity.this, "Account creation failed", Toast.LENGTH_SHORT).show();
                         else {
-                            FirebaseDatabase db = FirebaseDatabase.getInstance();
-                            DatabaseReference ref = db.getReference("msg");
-                            ref.setValue("hello");
+                            /*FirebaseDatabase db = FirebaseDatabase.getInstance();
+                            DatabaseReference users = db.getReference("users");
+                            users.push();*/
                             finish();
                         }
                     }
