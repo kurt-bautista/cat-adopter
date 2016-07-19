@@ -42,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
                 {
                     //signed in
                     //startActivity(MainActivity)
+                    Toast.makeText(LoginActivity.this, "login", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
@@ -63,6 +64,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onStop();
         if(mAuthListener != null) {
             mAuth.removeAuthStateListener(mAuthListener);
+            mAuth.signOut();
         }
     }
 

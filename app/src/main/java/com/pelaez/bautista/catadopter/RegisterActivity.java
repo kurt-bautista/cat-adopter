@@ -16,6 +16,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -45,7 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                if(user != null); //start MainActivity
+                if(user != null) Toast.makeText(RegisterActivity.this, "register", Toast.LENGTH_SHORT).show(); //start MainActivity
                 else; //signed out
             }
         };
@@ -61,6 +63,7 @@ public class RegisterActivity extends AppCompatActivity {
     public void onStop() {
         super.onStop();
         if(mAuthListener != null) mAuth.removeAuthStateListener(mAuthListener);
+        //mAuth.signOut();
     }
 
     public void confirm(View v) {
@@ -78,7 +81,9 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.cancel();
                     }
-                });
+                }).setTitle("Confirm");
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
     private void createAccount() {
@@ -90,7 +95,12 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(!task.isSuccessful()) Toast.makeText(RegisterActivity.this, "Account creation failed", Toast.LENGTH_SHORT).show();
-                        else finish();
+                        else {
+                            FirebaseDatabase db = FirebaseDatabase.getInstance();
+                            DatabaseReference ref = db.getReference("msg");
+                            ref.setValue("hello");
+                            finish();
+                        }
                     }
                 });
     }
@@ -116,10 +126,10 @@ public class RegisterActivity extends AppCompatActivity {
 
         String number = contact.getText().toString();
         if (number.length() != 11 && number.length() != 7) {
-            email.setError("Please enter a valid phone number.");
+            contact.setError("Please enter a valid phone number.");
             valid = false;
         } else {
-            email.setError(null);
+            contact.setError(null);
         }
 
         String password = this.password.getText().toString();
