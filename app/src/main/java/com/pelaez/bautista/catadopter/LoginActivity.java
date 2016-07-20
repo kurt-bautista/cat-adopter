@@ -69,6 +69,13 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        finish();
+        super.onBackPressed();
+
+    }
+
     public void login(View v) {
 
         if(!validateForm()) return;
