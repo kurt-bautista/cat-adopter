@@ -41,8 +41,9 @@ public class LoginActivity extends AppCompatActivity {
                 if(user != null)
                 {
                     //signed in
-                    //startActivity(MainActivity)
-                    Toast.makeText(LoginActivity.this, "login", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(LoginActivity.this, com.pelaez.bautista.catadopter.MainActivity.class);
+                    startActivity(i);
+                    //Toast.makeText(LoginActivity.this, "login", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
@@ -64,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onStop();
         if(mAuthListener != null) {
             mAuth.removeAuthStateListener(mAuthListener);
-            mAuth.signOut();
+            //mAuth.signOut();
         }
     }
 

@@ -53,6 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
                     FirebaseDatabase db = FirebaseDatabase.getInstance();
                     DatabaseReference users = db.getReference("users");
                     users.child(user.getUid()).setValue(u);
+                    //users.child(user.getUid()).child()
                 }
                 else; //signed out
             }
