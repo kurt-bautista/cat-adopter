@@ -22,10 +22,10 @@
             android:id="@+id/listView2" />
 
         <android.support.design.widget.FloatingActionButton
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_gravity="bottom|end"
-            android:layout_margin="26dp"
+            android:layout_margin="20dp"
             android:clickable="true"
             android:onClick="newCat"
             android:src="@drawable/ic_add_white_24px"/>
