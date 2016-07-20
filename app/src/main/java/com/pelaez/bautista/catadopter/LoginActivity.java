@@ -43,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
                     //signed in
                     Intent i = new Intent(LoginActivity.this, com.pelaez.bautista.catadopter.MainActivity.class);
                     startActivity(i);
+                    finish();
                     //Toast.makeText(LoginActivity.this, "login", Toast.LENGTH_SHORT).show();
                 }
                 else
