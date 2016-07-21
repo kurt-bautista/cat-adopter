@@ -3,6 +3,7 @@ package com.pelaez.bautista.catadopter;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,13 +11,18 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
+    private GridView mCatGrid;
+    private CatAdapter mAdapter;
+    private DatabaseReference mDatabase;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -77,6 +86,12 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         };
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        mCatGrid = (GridView)findViewById(R.id.catsGridView);
+        mAdapter = new CatAdapter(this, com.pelaez.bautista.catadopter.Cat.class, R.layout.cat_info, mDatabase.child("cats"));
+        mCatGrid.setAdapter(mAdapter);
     }
 
     @Override
@@ -89,6 +104,18 @@ public class MainActivity extends AppCompatActivity {
     public void onStop() {
         super.onStop();
         if(mAuthListener != null) mAuth.removeAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            case R.id.search:
+                Toast.makeText(this, "test", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return true;
+        }
     }
 
     //region idk what this does
