@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">CatAdopter</string>
+    <string name="welcome">Welcome</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="rememberMe">Remember Me</string>
+    <string name="signIn">Log In</string>
+    <string name="register"><u>or create a new account</u></string>
+    <string name="name">Name</string>
+    <string name="contact">Contact Number</string>
+    <string name="repeat">Repeat password</string>
+    <string name="confirmRegister">Confirm</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+    <string-array name="screens_array">
+        <item>Home</item>
+        <item>Your Cats</item>
+        <item>Adoption Requests</item>
+        <item>Account</item>
+        <item>Sign Out</item>
+    </string-array>
 </resources>
