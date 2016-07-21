@@ -10,17 +10,19 @@ public class Cat {
     private String sex;
     private boolean neutered;
     private String lastUpdated;
+    private String key;
 
     public Cat() {
 
     }
 
-    public Cat(String n, String u, String s, boolean ne, String l) {
+    public Cat(String n, String u, String s, boolean ne, String l, String k) {
         name = n;
         uploaderID = u;
         sex = s;
         neutered = ne;
         lastUpdated = l;
+        key = k;
     }
 
     public String getLastUpdated() {
@@ -61,6 +63,14 @@ public class Cat {
 
     public void setNeutered(boolean neutered) {
         this.neutered = neutered;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
 }

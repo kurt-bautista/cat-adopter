@@ -37,9 +37,10 @@ public class CatDialog extends Dialog {
         gender = (TextView)findViewById(R.id.gender);
 
         mDatabase = FirebaseDatabase.getInstance().getReference("users");
+//        mDatabase.addValueEventListener()
 
         catName.setText(cat.getName());
-        //uploader.setText((CharSequence) mDatabase.child(cat.getUploaderID()).child("name"));
+        uploader.setText(mDatabase.child(cat.getUploaderID()).child("name").toString());
         updated.setText(cat.getLastUpdated());
         gender.setText("(" + String.valueOf(cat.getSex().charAt(0)) + ")");
     }

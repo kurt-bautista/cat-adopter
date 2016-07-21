@@ -65,10 +65,10 @@ public class NewCatActivity extends AppCompatActivity {
 
     public void saveReview(View v) {
         String sex = ((RadioButton)rg.findViewById(rg.getCheckedRadioButtonId())).getText().toString();
-        Cat c = new Cat(name.getText().toString(), user.getUid(), sex, neutered.isChecked(), new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         DatabaseReference cats = db.getReference("cats");
         String key = cats.push().getKey();
+        Cat c = new Cat(name.getText().toString(), user.getUid(), sex, neutered.isChecked(), new SimpleDateFormat("yyyy-MM-dd").format(new Date()), key);
         cats.child(key).setValue(c);
         finish();
     }
