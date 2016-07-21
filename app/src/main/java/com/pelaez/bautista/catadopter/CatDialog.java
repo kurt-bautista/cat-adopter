@@ -42,22 +42,19 @@ public class CatDialog extends Dialog {
         gender = (TextView)findViewById(R.id.gender);
 
         mDatabase = FirebaseDatabase.getInstance().getReference("users");
-        /*mDatabase.addValueEventListener(new ValueEventListener() {
+        mDatabase.child(cat.getUploaderID()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                u = dataSnapshot.getValue(com.pelaez.bautista.catadopter.User.class);
-                if(u.getUid().equals(cat.getUploaderID())) uploader.setText(u.getName());
+                User u = dataSnapshot.getValue(User.class);
+                uploader.setText(u.getName());
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });*/
-        //Query user = mDatabase.child(cat.getUploaderID())
-//        mDatabase.
+        });
         catName.setText(cat.getName());
-        //uploader.setText(mDatabase.child(cat.getUploaderID()).child("name").toString());
         updated.setText(cat.getLastUpdated());
         gender.setText("(" + String.valueOf(cat.getSex().charAt(0)) + ")");
     }
