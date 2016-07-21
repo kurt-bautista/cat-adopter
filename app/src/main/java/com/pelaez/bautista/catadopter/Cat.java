@@ -9,19 +9,17 @@ public class Cat {
     private String uploaderID;
     private String sex;
     private boolean neutered;
-    private String dateCreated;
     private String lastUpdated;
 
     public Cat() {
 
     }
 
-    public Cat(String n, String u, String s, boolean ne, String d, String l) {
+    public Cat(String n, String u, String s, boolean ne, String l) {
         name = n;
         uploaderID = u;
         sex = s;
         neutered = ne;
-        dateCreated = d;
         lastUpdated = l;
     }
 
@@ -63,14 +61,6 @@ public class Cat {
 
     public void setNeutered(boolean neutered) {
         this.neutered = neutered;
-    }
-
-    public String getDateCreated() {
-        return dateCreated;
-    }
-
-    public void setDateCreated(String dateCreated) {
-        this.dateCreated = dateCreated;
     }
 
 }

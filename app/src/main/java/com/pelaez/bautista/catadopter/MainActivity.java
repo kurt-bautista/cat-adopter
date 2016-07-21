@@ -173,4 +173,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
     }
+
+    public void newCat(View v) {
+        Intent i = new Intent(this, com.pelaez.bautista.catadopter.NewCatActivity.class);
+        startActivity(i);
+    }
 }
