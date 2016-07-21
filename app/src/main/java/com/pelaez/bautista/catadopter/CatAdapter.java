@@ -67,11 +67,14 @@ public class CatAdapter extends BaseAdapter {
         if(view == null) view = mActivity.getLayoutInflater().inflate(mLayout, viewGroup, false);
         System.out.println(getItem(i));
         Cat model = (Cat)getItem(i);
-        populateView(view, model, i);
+        view = mActivity.getLayoutInflater().inflate(R.layout.cat_info, null);
+        view.setTag(model);
+//        populateView(view, model, i);
         return view;
     }
 
-    protected void populateView(View v, Cat model, int i) {
-        v = mActivity.getLayoutInflater().inflate(R.layout.cat_info, null);
-    }
+//    protected void populateView(View v, Cat model, int i) {
+//        v = mActivity.getLayoutInflater().inflate(R.layout.cat_info, null);
+//        v.setTag(model);
+//    }
 }

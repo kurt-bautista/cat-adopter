@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
@@ -92,6 +93,19 @@ public class MainActivity extends AppCompatActivity {
         mCatGrid = (GridView)findViewById(R.id.catsGridView);
         mAdapter = new CatAdapter(this, com.pelaez.bautista.catadopter.Cat.class, R.layout.cat_info, mDatabase.child("cats"));
         mCatGrid.setAdapter(mAdapter);
+        mCatGrid.setOnItemClickListener(
+                new AdapterView.OnItemClickListener()
+                {
+                    @Override
+                    public void onItemClick(AdapterView<?> arg0, View view,
+                                            int position, long id) {
+
+                        CatDialog cd = new CatDialog(MainActivity.this, (Cat)view.getTag());
+                        cd.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                        cd.show();
+                    }
+                }
+        );
     }
 
     @Override
