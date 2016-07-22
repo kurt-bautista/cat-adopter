@@ -182,6 +182,19 @@ public class MainActivity extends AppCompatActivity {
                 setTitle(screens[0]);
                 mDrawerLayout.closeDrawer(mDrawerList);
                 break;
+            case 2:
+                mDrawerList.setItemChecked(2, true);
+                setTitle(screens[2]);
+                mDrawerLayout.closeDrawer(mDrawerList);
+                Intent i2= new Intent(this,AdoptionRequestActivity.class);
+                startActivity(i2);
+                break;
+            case 3:
+                mDrawerList.setItemChecked(3, true);
+                setTitle(screens[3]);
+                mDrawerLayout.closeDrawer(mDrawerList);
+                Intent i3 = new Intent(this,AccountActivity.class);
+                startActivity(i3);
             case 4:
                 mAuth.signOut();
                 break;

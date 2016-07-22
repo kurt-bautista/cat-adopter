@@ -1,5 +1,13 @@
 package com.pelaez.bautista.catadopter;
 
+import android.graphics.Bitmap;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 /**
  * Created by kurtv on 7/21/2016.
  */
@@ -7,10 +15,13 @@ public class Cat {
 
     private String name;
     private String uploaderID;
+    private String uploader;
     private String sex;
     private boolean neutered;
     private String lastUpdated;
     private String key;
+    private Bitmap bitmap;
+
 
     public Cat() {
 
@@ -23,7 +34,38 @@ public class Cat {
         neutered = ne;
         lastUpdated = l;
         key = k;
+
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("users");
+        mDatabase.child(u).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User u = dataSnapshot.getValue(User.class);
+                uploader = u.getName();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
+
+    public String getUploader() {
+        return uploader;
+    }
+
+    public void setUploader(String uploader) {
+        this.uploader = uploader;
+    }
+
+    public Bitmap getBitmap() {
+        return bitmap;
+    }
+
+    public void setBitmap(Bitmap bitmap) {
+        this.bitmap = bitmap;
+    }
+
 
     public String getLastUpdated() {
         return lastUpdated;

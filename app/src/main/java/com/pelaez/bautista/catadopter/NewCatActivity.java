@@ -14,11 +14,18 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -32,6 +39,13 @@ public class NewCatActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseUser user;
+
+    private StorageReference storageRef;
+    private StorageReference catPictures;
+
+    private Bitmap bitmap;
+
+    private Cat c;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +63,10 @@ public class NewCatActivity extends AppCompatActivity {
                 user = firebaseAuth.getCurrentUser();
             }
         };
+
+        FirebaseStorage storage= FirebaseStorage.getInstance();
+        storageRef = storage.getReferenceFromUrl("gs://catadopter-9e09d.appspot.com");
+
     }
 
     @Override
@@ -70,6 +88,27 @@ public class NewCatActivity extends AppCompatActivity {
         String key = cats.push().getKey();
         Cat c = new Cat(name.getText().toString(), user.getUid(), sex, neutered.isChecked(), new SimpleDateFormat("yyyy-MM-dd").format(new Date()), key);
         cats.child(key).setValue(c);
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG,50, baos);
+        byte[] datas = baos.toByteArray();
+
+        catPictures= storageRef.child(key);
+
+        UploadTask uploadTask = catPictures.putBytes(datas);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle unsuccessful uploads
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
+                Uri downloadUrl = taskSnapshot.getDownloadUrl();
+            }
+        });
+
         finish();
     }
 
@@ -91,12 +130,13 @@ public class NewCatActivity extends AppCompatActivity {
             Uri uri = data.getData();
 
             try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                //bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                bitmap = ImageUtils.resizeBitmap((new File(uri.getPath())).getAbsolutePath(), 150);
                 // Log.d(TAG, String.valueOf(bitmap));
 
                 ImageView imageView = (ImageView) findViewById(R.id.imageButton);
                 imageView.setImageBitmap(bitmap);
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
