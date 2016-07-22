@@ -2,7 +2,9 @@ package com.pelaez.bautista.catadopter;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,9 +36,12 @@ public class CatDialog extends Dialog {
     private FirebaseUser user;
     private DatabaseReference mRequest;
     private DatabaseReference mDatabase;
+    private Context c;
 
     public CatDialog(Context c, Cat cat) {
+
         super(c);
+        this.c=c;
         this.cat = cat;
     }
 
@@ -79,17 +84,39 @@ public class CatDialog extends Dialog {
             @Override
             //On click function
             public void onClick(View view) {
-                FirebaseDatabase db = FirebaseDatabase.getInstance();
-                DatabaseReference requests = db.getReference("requests");
-                //create request object
-                Request r= new Request(cat.getUploaderID(),user.getUid(),cat.getKey());
-                String key =mRequest.push().getKey();
-                mRequest.child(key).setValue(r);
+                confirm(view);
 
 
 
             }
         });
+    }
+
+    public void confirm(View v) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(c);
+        builder.setMessage("Are you sure?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        FirebaseDatabase db = FirebaseDatabase.getInstance();
+                        DatabaseReference requests = db.getReference("requests");
+                        //create request object
+                        Request r= new Request(cat.getUploaderID(),user.getUid(),cat.getKey());
+                        String key =mRequest.push().getKey();
+                        mRequest.child(key).setValue(r);
+                        dismiss();
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                }).setTitle("Confirm");
+        AlertDialog alert = builder.create();
+        alert.show();
+
     }
 
 }
