@@ -101,11 +101,8 @@ public class RegisterActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(!task.isSuccessful()) Toast.makeText(RegisterActivity.this, "Account creation failed", Toast.LENGTH_SHORT).show();
+                        if(!task.isSuccessful()) Toast.makeText(RegisterActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         else {
-                            /*FirebaseDatabase db = FirebaseDatabase.getInstance();
-                            DatabaseReference users = db.getReference("users");
-                            users.push();*/
                             finish();
                         }
                     }

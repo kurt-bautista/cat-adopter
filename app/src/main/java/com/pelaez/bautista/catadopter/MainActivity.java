@@ -182,6 +182,12 @@ public class MainActivity extends AppCompatActivity {
                 setTitle(screens[0]);
                 mDrawerLayout.closeDrawer(mDrawerList);
                 break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
             case 4:
                 mAuth.signOut();
                 break;
