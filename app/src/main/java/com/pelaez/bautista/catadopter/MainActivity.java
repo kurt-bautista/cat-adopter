@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -25,7 +27,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class MainActivity extends AppCompatActivity {
+import layout.CatsGridFragment;
+
+public class MainActivity extends AppCompatActivity implements CatsGridFragment.OnGridClickListener {
 
     private String[] screens;
     private DrawerLayout mDrawerLayout;
@@ -33,9 +37,6 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
-    private GridView mCatGrid;
-    private CatAdapter mAdapter;
-    private DatabaseReference mDatabase;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -87,25 +88,15 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         };
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        Fragment catGrid = CatsGridFragment.newInstance();
+        fragmentManager.beginTransaction()
+                .replace(R.id.mainContainer, catGrid)
+                .commit();
+        mDrawerList.setItemChecked(0, true);
+        setTitle(screens[0]);
+        mDrawerLayout.closeDrawer(mDrawerList);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-
-        mCatGrid = (GridView)findViewById(R.id.catsGridView);
-        mAdapter = new CatAdapter(this, com.pelaez.bautista.catadopter.Cat.class, R.layout.cat_info, mDatabase.child("cats"));
-        mCatGrid.setAdapter(mAdapter);
-        mCatGrid.setOnItemClickListener(
-                new AdapterView.OnItemClickListener()
-                {
-                    @Override
-                    public void onItemClick(AdapterView<?> arg0, View view,
-                                            int position, long id) {
-
-                        CatDialog cd = new CatDialog(MainActivity.this, (Cat)view.getTag());
-                        cd.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                        cd.show();
-                    }
-                }
-        );
     }
 
     @Override
@@ -148,6 +139,13 @@ public class MainActivity extends AppCompatActivity {
         return super.onPrepareOptionsMenu(menu);
     }
 
+    @Override
+    public void onGridClick(Cat cat) {
+        CatDialog cd = new CatDialog(MainActivity.this, cat);
+        cd.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        cd.show();
+    }
+
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView parent, View view, int position, long id) {
@@ -175,9 +173,14 @@ public class MainActivity extends AppCompatActivity {
     //endregion
 
     private void selectItem(int position) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
         switch (position)
         {
             case 0:
+                Fragment catGrid = CatsGridFragment.newInstance();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.mainContainer, catGrid)
+                        .commit();
                 mDrawerList.setItemChecked(0, true);
                 setTitle(screens[0]);
                 mDrawerLayout.closeDrawer(mDrawerList);
@@ -192,10 +195,5 @@ public class MainActivity extends AppCompatActivity {
                 mAuth.signOut();
                 break;
         }
-    }
-
-    public void newCat(View v) {
-        Intent i = new Intent(this, com.pelaez.bautista.catadopter.NewCatActivity.class);
-        startActivity(i);
     }
 }

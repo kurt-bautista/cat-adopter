@@ -31,29 +31,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true">
-
-            <GridView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/catsGridView"
-                android:numColumns="2"
-                android:horizontalSpacing="5dp"
-                android:verticalSpacing="5dp"
-                android:descendantFocusability="blocksDescendants" />
-
-            <android.support.design.widget.FloatingActionButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:fabSize="normal"
-                android:layout_gravity="bottom|end"
-                android:layout_margin="16dp"
-                android:clickable="true"
-                android:onClick="newCat"
-                android:src="@drawable/ic_add_white_24px"/>
-
-
-        </FrameLayout>
+            android:layout_centerHorizontal="true"
+            android:id="@+id/mainContainer" />
 
     </LinearLayout>
 

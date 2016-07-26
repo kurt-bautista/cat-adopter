@@ -48,7 +48,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if(user != null) {
-                    Toast.makeText(RegisterActivity.this, "register", Toast.LENGTH_SHORT).show(); //start MainActivity
+                    //Toast.makeText(RegisterActivity.this, "register", Toast.LENGTH_SHORT).show(); //start MainActivity
                     User u = new User(user.getUid(), user.getEmail(), name.getText().toString(), contact.getText().toString());
                     FirebaseDatabase db = FirebaseDatabase.getInstance();
                     DatabaseReference users = db.getReference("users");
