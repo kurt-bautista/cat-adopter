@@ -16,16 +16,23 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <android.support.v7.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            android:elevation="4dp"
-            app:navigationIcon="@drawable/ic_menu_white_24px"
-            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            android:id="@+id/mainToolbar">
-        </android.support.v7.widget.Toolbar>
+        <!--<android.support.design.widget.AppBarLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">-->
+
+            <android.support.v7.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimaryDark"
+                app:elevation="4dp"
+                app:navigationIcon="@drawable/ic_menu_white_24px"
+                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                android:id="@+id/mainToolbar"/>
+        <!--android:theme="@style/ThemeOverlay.AppCompat.ActionBar"-->
+
+        <!--</android.support.design.widget.AppBarLayout>-->
 
         <FrameLayout
             android:layout_width="match_parent"

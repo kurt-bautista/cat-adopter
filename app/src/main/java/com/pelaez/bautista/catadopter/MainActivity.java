@@ -1,5 +1,7 @@
 package com.pelaez.bautista.catadopter;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.annotation.NonNull;
@@ -10,6 +12,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -85,16 +88,17 @@ public class MainActivity extends AppCompatActivity implements CatsGridFragment.
                 {
                     Intent i = new Intent(MainActivity.this, com.pelaez.bautista.catadopter.LoginActivity.class);
                     startActivity(i);
+                    finish();
                 }
             }
         };
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment catGrid = CatsGridFragment.newInstance();
         fragmentManager.beginTransaction()
-                .replace(R.id.mainContainer, catGrid)
+                .add(R.id.mainContainer, catGrid)
                 .commit();
         mDrawerList.setItemChecked(0, true);
-        setTitle(screens[0]);
+        getSupportActionBar().setTitle(screens[0]);
         mDrawerLayout.closeDrawer(mDrawerList);
 
     }
@@ -129,7 +133,15 @@ public class MainActivity extends AppCompatActivity implements CatsGridFragment.
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
-        return super.onCreateOptionsMenu(menu);
+
+        SearchManager searchManager =
+                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView =
+                (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setSearchableInfo(
+                searchManager.getSearchableInfo(getComponentName()));
+
+        return /*super.onCreateOptionsMenu(menu)*/true;
     }
 
     @Override

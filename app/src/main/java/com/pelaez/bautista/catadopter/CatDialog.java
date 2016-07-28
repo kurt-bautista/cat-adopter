@@ -3,7 +3,9 @@ package com.pelaez.bautista.catadopter;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -23,6 +25,9 @@ public class CatDialog extends Dialog {
     private TextView uploader;
     private TextView updated;
     private TextView gender;
+    private ImageView pic;
+    private CheckBox neutered;
+
     private User u;
 
     private DatabaseReference mDatabase;
@@ -36,10 +41,12 @@ public class CatDialog extends Dialog {
         super.onCreate(bundle);
         setContentView(R.layout.cat_more_info);
 
-        catName = (TextView)findViewById(R.id.name);
-        uploader = (TextView)findViewById(R.id.uploader);
-        updated = (TextView)findViewById(R.id.date);
-        gender = (TextView)findViewById(R.id.gender);
+        catName = (TextView)findViewById(R.id.catNameDialogText);
+        uploader = (TextView)findViewById(R.id.uploaderDialogText);
+        updated = (TextView)findViewById(R.id.lastUpdatedDialogText);
+        gender = (TextView)findViewById(R.id.genderDialogText);
+        neutered = (CheckBox)findViewById(R.id.neuteredDialogCheckBox);
+        pic = (ImageView)findViewById(R.id.catDialogImage);
 
         mDatabase = FirebaseDatabase.getInstance().getReference("users");
         mDatabase.child(cat.getUploaderID()).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -56,7 +63,8 @@ public class CatDialog extends Dialog {
         });
         catName.setText(cat.getName());
         updated.setText(cat.getLastUpdated());
-        gender.setText("(" + String.valueOf(cat.getSex().charAt(0)) + ")");
+        gender.setText(cat.getSex());
+        neutered.setChecked(cat.getNeutered());
     }
 
 }
