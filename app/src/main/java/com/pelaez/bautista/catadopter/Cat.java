@@ -2,6 +2,8 @@ package com.pelaez.bautista.catadopter;
 
 /**
  * Created by kurtv on 7/21/2016.
+ *
+ * Cat object
  */
 public class Cat {
 
